@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -44,11 +43,6 @@ module.exports = {
           },
           {
             loader: 'css-loader', // translates CSS into CommonJS
-            query: {
-              modules: true,
-              camelCase: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
           },
           {
             loader: 'sass-loader' // compiles Sass to CSS
@@ -64,13 +58,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve('./index.html')
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../fonts'),
-        to: path.resolve(__dirname, '../build/fonts')
-      }
-    ])
+    })
   ],
   resolve: {
     alias: {
