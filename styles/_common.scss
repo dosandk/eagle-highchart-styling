@@ -1,0 +1,15 @@
+:global(.hidden) {
+  display: none;
+}
+
+body, html {
+  height: 100%;
+}
+
+.theme-toggle-btn {
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    outline: 1px solid red;
+  }
+}
