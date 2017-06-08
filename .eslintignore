@@ -1,7 +1,0 @@
-*.spec.js
-webpack
-dist
-coverage
-node_modules
-*.scss
-*.md
