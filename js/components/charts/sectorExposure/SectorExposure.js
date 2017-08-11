@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import getChartConfig from '../configs';
 
+import json2csv from 'json2csv';
+
 import { ReactHighcharts } from '../../../utils/reactHighcharts';
 import {mockedData} from './sector-data.mock';
 
@@ -23,6 +25,31 @@ class SectorExposureChart extends Component {
     });
   }
 
+  downloadCSV () {
+    try {
+      const result = json2csv({
+        data: mockedData.map(({y, name, description, marketValue}) => ({y, name, description, marketValue})),
+        fields: ['y', 'name', 'description', 'marketValue'],
+        fieldNames: ['Value', 'Sector Name', 'Description', 'Market Value'],
+        del: ';'
+      });
+
+      const blob = new Blob([result], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'sector-exposure-chart.csv');
+      link.style.visibility = 'hidden';
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   render() {
     const options = {
       data: mockedData
@@ -40,6 +67,10 @@ class SectorExposureChart extends Component {
           ref={this.getRef}
           config={config}
           domProps={{className: 'highcharts-dom-wrapper'}} />
+
+        <div className="download-scv-btn no-print" onClick={this.downloadCSV}>
+          Export to Excel (CSV file)
+        </div>
       </div>
     );
   }

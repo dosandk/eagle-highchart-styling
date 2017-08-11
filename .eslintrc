@@ -19,7 +19,7 @@
       "const": "never"
     }],
     "sort-vars": 0,
-    "space-before-function-paren": [2, "never"],
+    "space-before-function-paren": 0,
     "indent": [2, 2],
     "curly": [2, "multi-line"],
     "vars-on-top": 1,

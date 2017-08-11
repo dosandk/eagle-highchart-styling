@@ -13,3 +13,8 @@ body, html {
     outline: 1px solid red;
   }
 }
+
+@media print {
+  .no-print { display: none; }
+  .page-break	{ display: block; page-break-before: always; }
+}
